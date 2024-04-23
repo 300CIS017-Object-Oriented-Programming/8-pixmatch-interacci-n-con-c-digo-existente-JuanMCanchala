@@ -10,8 +10,8 @@ from streamlit_autorefresh import st_autorefresh
 st.set_page_config(page_title = "PixMatch", page_icon="🕹️", layout = "wide", initial_sidebar_state = "expanded")
 
 vDrive = os.path.splitdrive(os.getcwd())[0]
-#if vDrive == "C:": vpth = "C:/Users/Shawn/dev/utils/pixmatch/"   # local developer's disc
-vpth = "./"
+if vDrive == "C:": vpth = "C:/Users/Shawn/dev/utils/pixmatch/"   # local developer's disc
+else: vpth = "./"
 
 sbe = """<span style='font-size: 140px;
                       border-radius: 7px;
@@ -88,8 +88,8 @@ Si es 'read', muestra de manera ordenada los puntajes más altos del Leaderboard
                 leaderboard[str(leaderboard_dict_lngth + 1)] = {'NameCountry': mystate.GameDetails[3], 'HighestScore': mystate.myscore}
                 leaderboard = dict(sorted(leaderboard.items(), key=lambda item: item[1]['HighestScore'], reverse=True))  # sort desc
 
-                if len(leaderboard) > 3:
-                    for i in range(len(leaderboard)-3): leaderboard.popitem()    # rmv last kdict ey
+                if len(leaderboard) > 4:
+                    for i in range(len(leaderboard)-4): leaderboard.popitem()    # rmv last kdict ey
 
                 json.dump(leaderboard, open(vpth + 'leaderboard.json', 'w'))     # write file
 
@@ -100,7 +100,7 @@ Si es 'read', muestra de manera ordenada los puntajes más altos del Leaderboard
                     
                 leaderboard = dict(sorted(leaderboard.items(), key=lambda item: item[1]['HighestScore'], reverse=True))  # sort desc
 
-                sc0, sc1, sc2, sc3 = st.columns((2,3,3,3))
+                sc0, sc1, sc2, sc3, sc4 = st.columns((2,3,3,3,3))
                 rknt = 0
                 for vkey in leaderboard.keys():
                     if leaderboard[vkey]['NameCountry'] != '':
@@ -110,6 +110,7 @@ Si es 'read', muestra de manera ordenada los puntajes más altos del Leaderboard
                             sc1.write(f"🥇 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
                         elif rknt == 2: sc2.write(f"🥈 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
                         elif rknt == 3: sc3.write(f"🥈 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
+                        elif rknt == 4: sc4.write(f"🥈 | {leaderboard[vkey]['NameCountry']}: :red[{leaderboard[vkey]['HighestScore']}]")
 
 def InitialPage():
     """
@@ -262,13 +263,14 @@ Inicia un diccionario con información sobre cada botón del juego, incluyendo s
 
 def ScoreEmoji():
     """
-    - Si la puntuación del jugador es igual a 0, devuelve el emoji '😐'.
-    - Si la puntuación del jugador está entre -5 y -1 (inclusive), devuelve el emoji '😏'.
-    - Si la puntuación del jugador está entre -10 y -6 (inclusive), devuelve el emoji '☹️'.
-    - Si la puntuación del jugador es igual o inferior a -11, devuelve el emoji '😖'.
-    - Si la puntuación del jugador está entre 1 y 5 (inclusive), devuelve el emoji '🙂'.
-    - Si la puntuación del jugador está entre 6 y 10 (inclusive), devuelve el emoji '😊'.
-    - Si la puntuación del jugador es mayor que 10, devuelve el emoji '😁'.
+    Segun el rango de puntuacion va a devolver un emoji distinto siendo:
+    0: '😐'
+    -5 a -1: '😏'
+    -10 a -6: '☹️'
+    Menor o igual a -11: '😖'
+    1 a 5: '🙂'
+    6 a 10: '😊'
+    Mayor que 10: '😁'
     """
     if mystate.myscore == 0: return '😐'
     elif -5 <= mystate.myscore <= -1: return '😏'
@@ -316,11 +318,15 @@ Comprobación de finalización del juego: Registra la puntuación en el marcador
     for i in range(1, (total_cells_per_row_or_col+1)):
         tlst = ([1] * total_cells_per_row_or_col) + [2] # 2 = rt side padding
         globals()['cols' + str(i)] = st.columns(tlst)
-    
+
+    cont = 0
     for vcell in range(1, (total_cells_per_row_or_col ** 2)+1):
         if 1 <= vcell <= (total_cells_per_row_or_col * 1):
             arr_ref = '1'
             mval = 0
+        if cont == (total_cells_per_row_or_col * 1)+1:
+            mystate.runpage = Main
+            st.rerun()    
 
         elif ((total_cells_per_row_or_col * 1)+1) <= vcell <= (total_cells_per_row_or_col * 2):
             arr_ref = '2'
@@ -364,6 +370,7 @@ Comprobación de finalización del juego: Registra la puntuación en el marcador
                 globals()['cols' + arr_ref][vcell-mval].markdown(pressed_emoji.replace('|fill_variable|', '✅️'), True)
             
             elif mystate.plyrbtns[vcell]['isTrueFalse'] == False:
+                cont += 1
                 globals()['cols' + arr_ref][vcell-mval].markdown(pressed_emoji.replace('|fill_variable|', '❌'), True)
 
         else:

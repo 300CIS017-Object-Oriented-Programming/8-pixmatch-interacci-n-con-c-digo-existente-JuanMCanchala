@@ -45,3 +45,30 @@ Detalla en este markdown lo siguiente:
 - **Métodos Importantes:** Enumera los métodos principales para cada clase. Incluye una descripción de cuál sería la utilidad de cada método
 - **Imagen del UML del diagrama de clases**  Adjunta una imagen del UML del diagrama de clases como una forma visual de planificar y entender la estructura de las clases, métodos, atributos y relaciones que podría tener una versión mejorada del código fuente.
 - **Organización de archivos:** Propon una estructura de organización de los archivos de este proyecto para que no queden todos en la raiz principal. Investiga cuáles podrían ser buenas formas de organizar los directorios y a partir de tu investigación indica qué directorios crearías y cómo los organizarías. 
+La clase Jugador almacena información crucial sobre un jugador, como su puntaje, intentos en la partida y otros datos. Sus métodos incluyen ObtenerNombre y ObtenerPais para acceder al nombre y país del jugador, DefinirIntentosMaximos para establecer los intentos máximos permitidos, ObtenerCantidadFallos para obtener la cantidad de fallos y OtrosDatosUsuario para manejar otros detalles del usuario.
+
+# Mejoras
+#### Métodos clase Jugador:
+- **\_\_init\_\_(nombre, pais):** Constructor que inicializa el nombre, país, puntaje y número máximo de intentos del jugador.
+- **ObtenerNombre():** Devuelve el nombre del jugador.
+- **ObtenerPais():** Devuelve el país del jugador.
+- **DefinirIntentosMaximos(intentos):** Establece el número máximo de intentos permitidos.
+- **ObtenerPuntaje():** Devuelve el puntaje del jugador.
+- **ActualizarPuntaje(puntos):** Actualiza el puntaje del jugador.
+- **ObtenerCantidadFallos():** Devuelve la cantidad de fallos del jugador.
+- **OtrosDatosUsuario():** Maneja otros detalles del usuario.
+#### Métodos Emojis:
+- **\_\_init\_\_():** Constructor que inicializa la lista de emojis.
+- **SetEmojis(emojis):** Establece la lista de emojis.
+- **SetEmojisDificultad(dificultad):** Asigna emojis según la dificultad.
+- **AgregarEmoji(emoji):** Agrega un emoji a la lista.
+- **EliminarEmoji(emoji):** Elimina un emoji de la lista.
+- **ObtenerEmojis():** Devuelve la lista de emojis.
+#### Métodos juego (Pixmatch):
+- **\_\_init\_\_():** Constructor que inicializa la cantidad de emojis seleccionados y la lista de emojis restantes.
+- **SeleccionarEmojis(cantidad):** Selecciona emojis para el juego.
+- **CalcularEmojisRestantes():** Calcula emojis restantes por seleccionar.
+- **VerificarCombinacion(combinacion):** Verifica si la combinación de emojis es correcta.
+
+
+
