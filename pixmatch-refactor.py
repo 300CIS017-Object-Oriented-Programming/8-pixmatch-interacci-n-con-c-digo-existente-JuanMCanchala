@@ -10,7 +10,8 @@ from streamlit_autorefresh import st_autorefresh
 st.set_page_config(page_title = "PixMatch", page_icon="🕹️", layout = "wide", initial_sidebar_state = "expanded")
 
 vDrive = os.path.splitdrive(os.getcwd())[0]
-if vDrive == "C:": vpth = "C:/Users/Shawn/dev/utils/pixmatch/"   # local developer's disc
+if vDrive == "C:": 
+    vpth = "C:\\Universidad\\semestre 3\\POO\\8-pixmatch-interacci-n-con-c-digo-existente-JuanMCanchala\\"   
 else: vpth = "./"
 
 sbe = """<span style='font-size: 140px;
@@ -324,7 +325,7 @@ Comprobación de finalización del juego: Registra la puntuación en el marcador
         if 1 <= vcell <= (total_cells_per_row_or_col * 1):
             arr_ref = '1'
             mval = 0
-        if cont == (total_cells_per_row_or_col * 1)+1:
+        elif cont == (total_cells_per_row_or_col * 1)+1:
             mystate.runpage = Main
             st.rerun()    
 
