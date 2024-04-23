@@ -1,18 +1,17 @@
 
 ## Evidencia del cambio
-> Ponga aquí evidencia con imágenes y fragmento de código
 
 #### Archivo Json guarda 4 jugadores
-
+![mejora1.png](img/mejora1.png)
 #### Interfa gráfica muestra cuatro jugadores
-
+![mejora2.png](img/mejora2.png)
 #### Usuario pierde el juego cuando supera un máximo posible de fallos.
-
+![mejora3.png](img/mejora3.png)
 ## Encuesta de la experiencia
 Por favor, responde las siguientes preguntas basadas en tu experiencia modificando el código para incluir cuatro personas en el leaderboard en lugar de tres.
 
 **Nombre:**
-
+Juan Manuel Canchala Jimenez
 #### 1. ¿Cuánto tiempo te llevó entender las secciones del código relacionada con el leaderboard?
 - [ ] Menos de 10 minutos
 - [ ] Entre 10 y 30 minutos
